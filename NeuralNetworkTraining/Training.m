@@ -46,7 +46,7 @@ layers = [
     reluLayer()
     averagePooling2dLayer(2,'Stride',2)
     
-    fullyConnectedLayer(2)
+    fullyConnectedLayer(8)
     softmaxLayer
     classificationLayer];
 

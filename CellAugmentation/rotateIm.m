@@ -6,7 +6,7 @@ R = length(img(:,1));
 C = length(img(1,:));
 
 stdIm = std(img(:));
-muIm = mean(img(:));
+muIm = mean(img(:)*1.1);
 bigIm = imrotate(img,theta);
 mask = ~imrotate(1+0*img,theta);
 mask2 = imdilate(mask,strel('disk',Br));

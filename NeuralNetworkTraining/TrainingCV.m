@@ -2,12 +2,7 @@ clc;
 clear all; 
 close all
 
-% Preparation
-numTrainPercentage = 0.8;
-parentFile = cd;
-
 % Set Up Training Options
-
 layers = [
     imageInputLayer([224 224 1])
     
@@ -59,6 +54,7 @@ options = trainingOptions('sgdm', ...
 
 accuracy = 0.0;
 
+% Perform cross-validation
 for i = 0:9
     dsFileTrain = strcat(cd, "/train", num2str(i);
     imdsTrain = imageDatastore(dsFile, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
@@ -67,8 +63,6 @@ for i = 0:9
 
     % Train Network
     [net,info] = trainNetwork(imdsTrain, layers, options);
-%    save('net','net'); % this provides you with a 'net.mat' file you can then use to apply the model on new images
-%    save('info','info');
 
     % Compute Accuracy of Test Set
     YPred = classify(net,imdsTest);
@@ -76,4 +70,5 @@ for i = 0:9
     accuracy += sum(YPred == YValidation) / numel(YTest);
 end
 
-accuracyCV = accuracy / 10
+accuracyCV = accuracy / 10;
+disp(accruacyCV);

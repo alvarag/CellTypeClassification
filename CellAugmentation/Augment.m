@@ -20,9 +20,8 @@ patchRadiusT = 3;%radius of boundary between the original image and the
 %smoothing
 
 % Read the images
-
 for i = 0:9
-    dsFile = strcat(cd, "/train", num2str(i));
+    dsFile = strcat(cd, "/../NeuralNetworkTraining/train", num2str(i));
 
     imds = imageDatastore(dsFile, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
     [numFiles, ~] = size(imds.Files);
@@ -35,7 +34,7 @@ for i = 0:9
         
         % performs rotations
         for j = 1 : numRots
-            rot1 = rotateIm(img, ceil(rand()*60)-30, filtNumR, patchRadiusR);
+            rot1 = rotateIm(img, ceil(rand()*40), filtNumR, patchRadiusR);
             imwrite(rot1, strcat(char(name), '_r', num2str(j), '.jpg'), 'jpg');
         end
 
@@ -45,3 +44,4 @@ for i = 0:9
             imwrite(trans1, strcat(char(name), '_t', num2str(j), '.jpg'), 'jpg');
         end
     end
+end
